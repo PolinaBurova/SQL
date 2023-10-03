@@ -1,10 +1,5 @@
 #In this SQL, I'm querying a database with multiple tables in it to quantify statistics about customer and order data. 
 
-Show all columns of January sales table:
-SELECT *
-FROM BIT_DB.JanSales
-WHERE length(orderid) = 6
-AND orderid <> 'Order ID';
 
 #1. How many orders were placed in January? 
 SELECT COUNT(orderid)
