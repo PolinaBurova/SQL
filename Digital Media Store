@@ -1,0 +1,141 @@
+SELECT *
+FROM chinook.employees
+
+SELECT *
+FROM chinook.customers
+
+customer full name, customer id, country not in US
+SELECT FirstName, LastName, CustomerID, Country
+FROM chinook.customers
+WHERE Country != 'USA';
+
+-----------------------------------------------------
+
+Show customers from Brazil
+SELECT *
+FROM chinook.customers
+WHERE country = 'Brazil'
+
+------------------------------------------------------
+
+
+SELECT *
+FROM chinook.invoices
+
+Find invoices from customers who are from brazil. full name, invoice ID, date inovoice, billing country
+
+SELECT customers.FirstName, customers.LastName, invoices.InvoiceId, invoices.InvoiceDate, invoices.BillingCountry
+FROM chinook.invoices invoices
+LEFT JOIN chinook.customers customers
+ON customers.CustomerID = invoices.CustomerID
+WHERE invoices.BillingCountry = 'Brazil'
+
+------------------------------------------------------
+
+SELECT *
+FROM chinook.employees
+WHERE Title = 'Sales Support Agent'
+
+---------------------------------------------
+
+Show the name of the person each employee reports to
+SELECT employee.EmployeeId, employee.FirstName, employee.LastName, employee.ReportsTo, manager.FirstName, manager.LastName
+FROM chinook.employees employee
+LEFT OUTER JOIN chinook.employees Manager
+ON employee.ReportsTo = Manager.EmployeeId
+
+----------------------------------------------------------
+
+SELECT DISTINCT BillingCountry
+FROM chinook.invoices
+
+
+--------------------------------------------------------
+
+
+--------------------------------------------
+
+
+--------------------------------------------
+
+SELECT *
+FROM chinook.invoices
+
+SELECT *
+FROM chinook.customers
+
+SELECT *
+FROM chinook.employees
+
+
+
+SELECT emp.LastName, emp.Firstname, inv.InvoiceId
+FROM chinook.Employees emp 
+JOIN chinook.Customers cust ON cust.SupportRepId = emp.EmployeeId
+JOIN chinook.Invoices Inv ON Inv.CustomerId = cust.CustomerId;
+
+
+---------------------
+
+invoice total, customer name, country, sales agent for all invoices and customers
+
+SELECT *
+FROM chinook.invoices - InvoiceId, CustomerId, BillingCountry
+
+SELECT *
+FROM chinook.invoice_items - need InvoiceId - Quantity*UnitPrice
+
+SELECT *
+FROM chinook.customers
+
+SELECT *
+FROM chinook.employees
+
+SELECT emp.LastName, emp.Firstname, cust.FirstName, cust.LastName, cust.Country, inv.total
+FROM chinook.employees emp 
+JOIN chinook.Customers cust ON cust.SupportRepId = emp.EmployeeId
+JOIN chinook.Invoices Inv ON Inv.CustomerId = cust.CustomerId;
+
+
+----
+
+how many invoices in 2009
+SELECT COUNT(*)
+FROM chinook.invoices
+WHERE InvoiceDate LIKE '%2009%'
+
+SELECT COUNT(*)
+FROM chinook.Invoices
+WHERE InvoiceDate BETWEEN '2009-01-01' AND '2009-12-31';
+
+---------------------------------------
+
+track name for each invoice line ID
+
+SELECT *
+FROM chinook.invoice_items
+
+SELECT *
+FROM chinook.invoices
+
+SELECT *
+FROM chinook.tracks
+
+SELECT  invoices.InvoiceId, items.InvoiceLineId, tracks.Name
+FROM chinook.tracks tracks
+JOIN chinook.invoice_items items ON items.TrackId = tracks.TrackId
+JOIN chinook.invoices invoices ON invoices.InvoiceId = items.InvoiceId
+
+----------------
+
+total sales 2009
+
+SELECT SUM(Total)
+FROM chinook.invoices
+WHERE InvoiceDate LIKE '%2009%'
+
+------------------------------------------------------
+
+
+
+
